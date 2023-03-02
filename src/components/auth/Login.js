@@ -7,6 +7,7 @@ export const Login = () => {
     const [email, set] = useState("hpassfield7@netvibes.com")
     const navigate = useNavigate()
 
+    //login button: makes a fetch call to JSON server to find a user with matching email. if valid email, in local storage setItem honeyUser with two properties, id and staff
     const handleLogin = (e) => {
         e.preventDefault()
 
@@ -56,4 +57,3 @@ export const Login = () => {
         </main>
     )
 }
-

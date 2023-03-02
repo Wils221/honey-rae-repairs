@@ -1,25 +1,16 @@
-import { Link, useNavigate } from "react-router-dom"
+import { CustomerNav } from "./CustomerNav"
+import { EmployeeNav } from "./EmployeeNav"
 import "./NavBar.css"
 
 export const NavBar = () => {
-    const navigate = useNavigate()
-
-    return (
-        <ul className="navbar">
-            <li className="navbar__item active">
-                <Link className="navbar__link" to="/tickets">Tickets</Link>
-            </li>
-            {
-                localStorage.getItem("honey_user")
-                    ? <li className="navbar__item navbar__logout">
-                        <Link className="navbar__link" to="" onClick={() => {
-                            localStorage.removeItem("honey_user")
-                            navigate("/", {replace: true})
-                        }}>Logout</Link>
-                    </li>
-                    : ""
-            }
-        </ul>
-    )
+    const localHoneyUser = localStorage.getItem("honey_user") //get honeyUser object out of local storage, return as a string
+    const honeyUserObject = JSON.parse(localHoneyUser) //makes variable above an object so we can use it. this is an oject with two properties: id and staff
+    
+    if (honeyUserObject.staff) {
+        //return employee view
+        return <EmployeeNav />
+    } else {
+        //return customer view
+        return <CustomerNav />
+    }
 }
-
